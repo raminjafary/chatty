@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"fmt"
+	"server/core/member"
 	"server/core/room"
 
 	"github.com/google/uuid"
@@ -20,6 +21,7 @@ func (rr *DB) CreateRoom(u *room.Room) (*room.Room, error) {
 		ID:       uuid.New().String(),
 		RoomName: u.RoomName,
 		UserId:   u.UserId,
+		Members:  make(map[string]*member.Member),
 	}
 
 	req = rr.db.Create(&newRoom)

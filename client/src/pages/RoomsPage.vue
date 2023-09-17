@@ -29,7 +29,7 @@ export default {
   methods: {
 
     fetchRooms() {
-      axios.get('http://localhost:8080/ws/getRooms', {
+      axios.get('http://localhost:8000/v1/rooms', {
         withCredentials: true
       })
         .then(response => {
@@ -46,10 +46,12 @@ export default {
 
       const payload = {
         id: String(Math.floor(Math.random() * 100000) + 1),
-        name: this.newRoomName
+        userId: String(Math.floor(Math.random() * 100000) + 1),
+        roomName: this.newRoomName,
+        // Members: []
       };
 
-      axios.post('http://localhost:8080/ws/createRoom', payload, {
+      axios.post('http://localhost:8000/v1/rooms/create', payload, {
         withCredentials: true
       })
         .then(response => {

@@ -37,7 +37,7 @@ export default {
     };
   },
   mounted() {
-    this.fetchMembers();
+    // this.fetchMembers();
     this.joinToRoom();
   },
   methods: {
@@ -49,7 +49,7 @@ export default {
       this.ws.send(this.newMessage);
     },
     fetchMembers() {
-      axios.get(`http://localhost:8080/ws/getClients/${this.roomId}`, {
+      axios.get(`http://localhost:8000/ws/getClients/${this.roomId}`, {
         withCredentials: true
       })
         .then(response => {
@@ -67,7 +67,7 @@ export default {
       const clientId = String(Math.floor(Math.random() * 100000) + 1);
       const Username = String(Math.floor(Math.random() * 100000) + 1);
 
-      this.ws = new WebSocket(`ws://localhost:8080/ws/joinRoom/${this.roomId}?userId=${clientId}&username=${Username}`);
+      this.ws = new WebSocket(`ws://localhost:8000/joinRoom/${this.roomId}?userId=${clientId}&username=${Username}`);
 
       this.ws.addEventListener('open', () => {
         this.connectionStatus = 'Connected';

@@ -10,7 +10,8 @@ import (
 )
 
 type User struct{}
-type Room struct{}
+type Room struct {
+}
 
 func (r *User) Decode(input []byte) (*user.User, error) {
 	user := &user.User{}

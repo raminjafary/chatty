@@ -11,7 +11,7 @@ import (
 
 var router *gin.Engine
 
-func InitRouter(userHandler handler.UserHandler, roomHandler handler.RoomHandler) {
+func InitRouter(userHandler handler.UserHandler, roomHandler handler.RoomHandler, hubHandler handler.HubHandler) {
 	router = gin.Default()
 
 	router.Use(TimeoutMiddleware(5 * time.Second))
@@ -36,6 +36,8 @@ func InitRouter(userHandler handler.UserHandler, roomHandler handler.RoomHandler
 
 	v1.GET("/rooms", roomHandler.GetRooms)
 	v1.POST("/rooms/create", roomHandler.CreateRoom)
+
+	v1.GET("/ws/joinRoom/:roomId", hubHandler.JoinRoom)
 
 }
 
